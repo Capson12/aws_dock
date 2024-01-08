@@ -25,6 +25,7 @@ jobs:
         TF_ACTION_WORKING_DIR: 'terraform'
         AWS_ACCESS_KEY_ID: ${{secret.AWS_ACCESS_KEY}}
         AWS_ACCESS_ACCESS_KEY: ${{secrets.AWS_ACCESS_KEY}}
+      run: terraform -chdir="./infrastructure" init -input-false
 
     - name: Terraform Apply
       uses: hashicorp/terraform-github-actions/apply@v0.4.0
