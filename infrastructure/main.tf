@@ -22,3 +22,15 @@ resource "aws_vpc" "vpc1" {
     }
   
 }
+
+resource "aws_subnet" "smtx_sub1" {
+  vpc_id = aws_vpc.vpc1.id
+  cidr_block = "10.12.1.0/24"
+  availability_zone = "eu-west-2"
+  
+
+  tags = {
+    name = "smtx_subnet1"
+  }
+  
+}
