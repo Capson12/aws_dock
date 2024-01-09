@@ -11,7 +11,7 @@ jobs:
 
     env:
       AWS_REGION: eu-west-2
-      TF_CLI_ARGS: "-input=false"
+      
 
     steps:
     - name: Checkout code
