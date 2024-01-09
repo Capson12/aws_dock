@@ -11,3 +11,10 @@ terraform {
 provider "aws" {
          region = "eu-west-2"
     }
+
+resource "aws_vpc" "vpc1" {
+
+    name = "smtx_vpc_main"
+    cidr_block = "10.0.0.0/16"
+  
+}
