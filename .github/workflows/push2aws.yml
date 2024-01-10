@@ -7,3 +7,38 @@ on:
 
     
 jobs:
+  build_and_push:
+    runs-on: self-hosted
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      
+      - name: Set Up Docker
+        uses: actions/setup-node@v3
+        with:
+          node-version: '14'
+      
+      - name: Build Docker Image
+        run: docker build -t node/application
+
+      - name: Log into Docker Registry
+        run: docker login -u ${{secets_DOCKER_USERNAME}} -p ${{secret_DOCKER_PASSWORD}}
+      
+      - name: Push Docker Image
+        run: docker push ${{secrets_DOCKER_USERNAME}}/your-image-name
+        
+
+      - name: SSH into EC2 and Pull Docker Image
+        uses: appleboy/ssh-action@v0.4.0
+        with:
+          host: ${{ secrets_EC2_HOST }}
+          username: ${{ secrets_EC2_USERNAME }}
+          key: ${{ secrets_EC2_PRIVATE_KEY }}
+          script: |
+            docker pull ${{secrets_DOCKER_USERNAME}}/your-image-name
+            docker stop your-container-name  # Replace with your container name
+            docker rm your-container-name    # Replace with your container name
+            docker run -d -p 80:80 your-dockerhub-username/your-image-name
+
