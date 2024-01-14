@@ -25,7 +25,6 @@ resource "aws_instance" "aws_ami_image" {
 
 resource "aws_eip_association" "eip1" {
   instance_id = aws_instance.aws_ami_image.id
-  network_interface_id = aws_network_interface.smtx_nic.id
   allocation_id = aws_instance.aws_ami_image.id
   
   
