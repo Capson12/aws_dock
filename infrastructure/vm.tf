@@ -25,7 +25,6 @@ resource "aws_instance" "aws_ami_image" {
 
 resource "aws_eip_association" "eip1" {
   instance_id = aws_instance.aws_ami_image.id
-  allocation_id = aws_instance.aws_ami_image.id
   
   
 
