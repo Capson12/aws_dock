@@ -27,8 +27,4 @@ resource "aws_eip" "smtx_eip" {
 
   instance = aws_instance.aws_ami_image.id
   domain = "vpc"
-  
-
-
-  
 }

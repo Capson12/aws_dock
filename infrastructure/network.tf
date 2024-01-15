@@ -4,8 +4,6 @@ resource "aws_internet_gateway" "smtx_iG" {
     tags = {
       name = "Main"
     }
-
-  
 }
 
 # resource "aws_route" "name" {
