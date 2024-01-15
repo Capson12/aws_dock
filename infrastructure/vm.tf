@@ -23,10 +23,8 @@ resource "aws_instance" "aws_ami_image" {
 # }
 
 
-resource "aws_eip_association" "eip1" {
-  instance_id = aws_instance.aws_ami_image.id
-  
-  
+resource "aws_eip" "smtx_eip" {
 
-  
+  instance = aws_instance.aws_ami_image.id
+  domain = "vpc"
 }
