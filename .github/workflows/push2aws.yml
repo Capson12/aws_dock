@@ -21,7 +21,9 @@ jobs:
           node-version: '14'
       
       - name: Log into Docker Registry
-        run: aws ecr get-login-password --region eu-west-2 | docker login --username AWS --password-stdin 117971648125.dkr.ecr.eu-west-2.amazonaws.com
+        run: | 
+            aws ecr get-login-password --region your-aws-region | docker login --username AWS --password-stdin your-aws-account-id.dkr.ecr.your-aws-region.amazonaws.com
+
       
       - name: Build Docker Image
         run: docker -chdir=web build -t smtx_ecr .
