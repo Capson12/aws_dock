@@ -25,5 +25,5 @@ jobs:
       - name: login to Amazon ECR
         id: login-ecr
         run: |
-          echo "${{ secrets.AWS_SECRET_KEY }}" | docker login --username "${{ secrets.AWS_SECRET_KEY_ID }}" --password-stdin 117971648125.dkr.ecr.eu-west-2.amazonaws.com
+          echo "${{ SECRET_DOCKER_PASSWORD }}" | docker login --username "${{ SECETS_DOCKER_USERNAME }}" --password-stdin 117971648125.dkr.ecr.eu-west-2.amazonaws.com
 
