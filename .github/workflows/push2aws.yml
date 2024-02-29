@@ -29,3 +29,6 @@ jobs:
            username: ${{ secrets.AWS_SECRET_KEY_ID }}
            password: ${{ secrets.AWS_SECRET_KEY }}
            registry: 117971648125.dkr.ecr.eu-west-2.amazonaws.com/smtx_ecr
+
+
+#testing 
