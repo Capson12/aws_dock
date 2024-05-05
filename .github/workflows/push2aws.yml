@@ -20,17 +20,3 @@ jobs:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: eu-west-2
-
-
-      - name: Login to Amazon ECR
-        id: login-ecr
-        uses: aws-actions/amazon-ecr-login@v1
-
-      - name: Build and push Docker image
-        run: |
-          docker -chdir=web build -t dockerfile/webapp .
-          docker -chdir=web tag dockerfile/webapp:latest ${{ secrets.AWS_ECR_URL }}/dockerfile/webapp:latest
-          docker -chdir=web push ${{ secrets.AWS_ECR_URL }} /dockerfile/webapp:latest
-          
-        env:
-          YOUR_ECR_REGISTRY_URL: ${{ steps.login-ecr.outputs.registry }}
