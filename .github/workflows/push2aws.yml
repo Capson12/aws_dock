@@ -1,33 +1,33 @@
-name: Deploy to AWS
+#name: Deploy to AWS
 
-on:
-    push:
-      branches:
-        - "main"
+#on:
+#    push:
+#      branches:
+ #       - "main"
 
     
-jobs:
-  build_and_push:
-    runs-on: self-hosted
+#jobs:
+#  build_and_push:
+#    runs-on: self-hosted
 
-    steps:
-    - name: Checkout Code
-      uses: actions/checkout@v2
+#    steps:
+#    - name: Checkout Code
+#      uses: actions/checkout@v2
       
-    - name: Configure AWS credentials
-      uses: aws-actions/configure-aws-credentials@v1
-      with:
-        aws-access-key-id: ${{ secrets.AWS_SECRET_KEY_ID }}
-        aws-secret-access-key: ${{ secrets.AWS_SECRET_KEY }}
-        aws-region: ${{ secrets.AWS_REGION }}
+#    - name: Configure AWS credentials
+#      uses: aws-actions/configure-aws-credentials@v1
+#      with:
+#        aws-access-key-id: ${{ secrets.AWS_SECRET_KEY_ID }}
+#        aws-secret-access-key: ${{ secrets.AWS_SECRET_KEY }}
+#        aws-region: ${{ secrets.AWS_REGION }}
 
-    - 
-      name: Docker login
-      uses: docker/login-action@v3
-      with:
-         username: ${{ secrets.SECETS_DOCKER_USERNAME }}
-         password: ${{ secrets.SECRET_DOCKER_PASSWORD }}
+#    - 
+#      name: Docker login
+#      uses: docker/login-action@v3
+#      with:
+#         username: ${{ secrets.SECETS_DOCKER_USERNAME }}
+#         password: ${{ secrets.SECRET_DOCKER_PASSWORD }}
 
-    - name: Build and push Docker image
-      run: |
+#    - name: Build and push Docker image
+#      run: |
           docker build -t dockerfile/webapp ./web
