@@ -13,16 +13,16 @@ resource "aws_instance" "aws_ami_image" {
 }
 
 
-# resource "aws_network_interface" "smtx_nic" {
-#   subnet_id = aws_subnet.smtx_sub1.id
+ resource "aws_network_interface" "smtx_nic" {
+   subnet_id = aws_subnet.smtx_sub1.id
   
 
-#   attachment {
-#     instance = aws_instance.aws_ami_image.id
-#     device_index = 1
-#   }
+   attachment {
+     instance = aws_instance.aws_ami_image.id
+     device_index = 1
+   }
   
-# }
+ }
 
 
 resource "aws_eip" "smtx_eip" {
