@@ -23,17 +23,10 @@ resource "aws_instance" "aws_ami_image" {
    }
   
  }
-
+ */
 
 resource "aws_eip" "smtx_eip" {
 
   instance = aws_instance.aws_ami_image.id
   domain = "vpc"
 }
-
- resource "aws_key_pair" "smtx_vm_key" {
-  
-  
-  
- }
- */
