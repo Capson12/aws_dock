@@ -6,7 +6,7 @@ resource "aws_internet_gateway" "smtx_iG" {
     }
 }
 
-resource "aws_security_group" "smtx_sg1" {
+/*resource "aws_security_group" "smtx_sg1" {
   vpc_id = aws_vpc.vpc1.id
 
   ingress {
@@ -29,3 +29,4 @@ resource "aws_security_group" "smtx_sg1" {
 
   
 }
+*/
