@@ -13,7 +13,7 @@ resource "aws_instance" "aws_ami_image" {
 }
 
 
- resource "aws_network_interface" "smtx_nic" {
+/* resource "aws_network_interface" "smtx_nic" {
    subnet_id = aws_subnet.smtx_sub1.id
   
 
@@ -31,8 +31,9 @@ resource "aws_eip" "smtx_eip" {
   domain = "vpc"
 }
 
-# resource "aws_key_pair" "smtx_vm_key" {
+ resource "aws_key_pair" "smtx_vm_key" {
   
   
   
-# }
+ }
+ */
