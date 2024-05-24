@@ -32,7 +32,7 @@ resource "aws_internet_gateway" "smtx_iG" {
 */
 resource "aws_default_security_group" "default" {
   vpc_id = aws_vpc.vpc1.id
-
+#Inbound Rules
   ingress {
     protocol  = -1
     self      = true
@@ -40,19 +40,36 @@ resource "aws_default_security_group" "default" {
     to_port   = 0
   }
 
+  ingress {
+    
+    protocol =  "tcp"
+    self = true
+    from_port = 22
+    to_port = 22
+  }
+
+    ingress {
+
+    protocol = "tcp"
+    from_port = 443
+    to_port = 443
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  ingress = {
+    protocol = "tcp"
+    from_port = 80
+    to_port = 80
+    cidr_block = ["0.0.0.0/0"]
+  }
+
+
+#Outbound Rules
   egress {
     from_port   = 0
     to_port     = 0
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
-  }
-
-
-  ingress {
-    protocol =  "tcp"
-    self = true
-    from_port = 22
-    to_port = 22
   }
 
   egress {
