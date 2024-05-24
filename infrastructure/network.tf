@@ -53,7 +53,7 @@ resource "aws_default_security_group" "default" {
     protocol = "tcp"
     from_port = 443
     to_port = 443
-    cidr_blocks = ["0.0.0.0/0"]
+    cidr_block = ["0.0.0.0/0"]
   }
 
   ingress {
