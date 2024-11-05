@@ -12,6 +12,7 @@ resource "aws_instance" "aws_ami_image" {
   
 }
 
+# 
 
 /* resource "aws_network_interface" "smtx_nic" {
    subnet_id = aws_subnet.smtx_sub1.id
