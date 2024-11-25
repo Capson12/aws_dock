@@ -42,7 +42,7 @@ resource "aws_default_security_group" "default" {
 
   ingress {
 
-    protocol =  "tcp"
+    protocol = "tcp"
     self = true
     from_port = 22
     to_port = 22
