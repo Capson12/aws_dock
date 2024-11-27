@@ -42,7 +42,7 @@ module "ecs_service" {
 
 
   source = "terraform-aws-modules/ecs/aws//modules/service"
-  
+  launch_type = "EC2"
 
   name = "service"
   cluster_arn = module.ecs.cluster_arn
@@ -53,17 +53,14 @@ module "ecs_service" {
   subnet_ids = [aws_subnet.smtx_sub1.id, aws_subnet.smtx_sub2.id]
 
   load_balancer = {
-
-
     service = {
       target_group_arn = module.alb.target_groups["ex_ecs"].arn
       container_name = "tesy"
       container_port = 80
-
-
-
     }
   }
+
+  
 
   
 }
