@@ -40,41 +40,40 @@ resource "aws_default_security_group" "default" {
     to_port   = 0
   }
 
-  ingress {
-
-    protocol = "tcp"
-    self = true
-    from_port = 22
-    to_port = 22
-  }
-
     ingress {
 
     protocol = "tcp"
     from_port = 443
     to_port = 443
-    cidr_blocks = ["0.0.0.0/0"]
+    cidr_blocks = ["10.0.0.0/16"]
   }
 
   ingress {
     protocol = "tcp"
     from_port = 80
     to_port = 80
-    cidr_blocks = ["0.0.0.0/0"]
+    cidr_blocks = ["10.0.0.0/16"]
   }
 
 
 #Outbound Rules
   egress {
-    from_port   = 0
-    to_port     = 0
-    protocol    = "-1"
+    from_port   = 443
+    to_port     = 443
+    protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
 
   egress {
     from_port = 22
     to_port = 22
+    protocol = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  egress {
+    from_port = 80
+    to_port = 80
     protocol = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }

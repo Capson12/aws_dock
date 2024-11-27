@@ -30,7 +30,7 @@ jobs:
         aws-region: ${{ env.AWS_REGION }}
 
     - name: Terraform Init
-      run: terraform -chdir=infrastructure init
+      run: terraform -chdir=infrastructure init --upgrade 
 
     - name: Terraform Validate
       run: terraform -chdir=infrastructure validate

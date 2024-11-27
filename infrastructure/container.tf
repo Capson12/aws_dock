@@ -1,3 +1,10 @@
+# locals {
+
+#   container_name = "simple-app"
+#   container_port = 80
+# }
+
+
 module "ecs" {
     source = "terraform-aws-modules/ecs/aws"
     version = "5.11.4"
@@ -24,6 +31,41 @@ module "ecs" {
         }
 
     }
+    
+}
+
+
+module "ecs_service" {
+
+
+  create_task_definition = false 
+
+
+  source = "terraform-aws-modules/ecs/aws//modules/service"
+  
+
+  name = "service"
+  cluster_arn = module.ecs.cluster_arn
+  cpu = 1024
+  memory = 1024
+
+  task_definition_arn = "arn:aws:ecs:eu-west-2:117971648125:task-definition/test-app:2"
+  subnet_ids = [aws_subnet.smtx_sub1.id, aws_subnet.smtx_sub2.id]
+
+  load_balancer = {
+
+
+    service = {
+      target_group_arn = module.alb.target_groups["ex_ecs"].arn
+      container_name = "tesy"
+      container_port = 80
+
+
+
+    }
+  }
+
+  
 }
 
 
@@ -44,20 +86,23 @@ module "alb" {
   enable_deletion_protection = false
 
   # Security Group
-  security_group_ingress_rules = {
-    all_http = {
-      from_port   = 80
-      to_port     = 80
-      ip_protocol = "tcp"
-      cidr_ipv4   = "0.0.0.0/0"
-    }
-  }
-  security_group_egress_rules = {
-    all = {
-      ip_protocol = "-1"
-      cidr_ipv4   = aws_subnet.smtx_sub1.cidr_block
-    }
-  }
+  # security_group_ingress_rules = {
+  #   all_http = {
+  #     from_port   = 80
+  #     to_port     = 80
+  #     ip_protocol = "tcp"
+  #     cidr_ipv4   = "0.0.0.0/0"
+  #   }
+  # }
+  # security_group_egress_rules = {
+  #   all = {
+  #     ip_protocol = "-1"
+  #     cidr_ipv4   = aws_subnet.smtx_sub1.cidr_block
+  #   }
+  # }
+
+  create_security_group = false
+  security_groups = [ aws_default_security_group.default.id ]
 
   listeners = {
     ex_http = {
@@ -106,7 +151,7 @@ module "autoscaling" {
 
     for_each = {
       ex_1 = {
-      instance_type = "t3.micro"
+      instance_type = "t3.medium"
       use_mixed_instances_policy = false
       mixed_instances_policy = {}
       }
@@ -114,10 +159,11 @@ module "autoscaling" {
 
 
     name = "alb_smtx"
-    instance_type = "t3.micro"
+    instance_type = "t3.medium"
     security_groups = [aws_default_security_group.default.id]
-    min_size = 1
-    max_size = 3
+    min_size = 0
+    max_size = 2
+    desired_capacity = 1
     #availability_zones = [aws_subnet.smtx_sub2.availability_zone, aws_subnet.smtx_sub1.availability_zone]
     vpc_zone_identifier = [aws_subnet.smtx_sub1.id, aws_subnet.smtx_sub2.id]
   
