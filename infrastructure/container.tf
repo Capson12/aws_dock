@@ -43,6 +43,7 @@ module "ecs_service" {
 
   source = "terraform-aws-modules/ecs/aws//modules/service"
   launch_type = "EC2"
+  security_group_ids = [aws_default_security_group.default.id]
 
   name = "service"
   cluster_arn = module.ecs.cluster_arn
