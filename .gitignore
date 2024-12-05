@@ -1,7 +1,3 @@
-node_modules/
-
-.dockerignore
-
 infrastructure/.terraform
 infrastructure/.terraform.lock.hcl
 

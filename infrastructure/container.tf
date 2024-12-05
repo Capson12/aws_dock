@@ -1,8 +1,3 @@
-# locals {
-
-#   container_name = "simple-app"
-#   container_port = 80
-# }
 
 ################################################################################
 # Cluster
@@ -50,7 +45,7 @@ module "ecs_service" {
   create_task_definition = false
   requires_compatibilities = ["EC2"]
   
-  task_definition_arn = "arn:aws:ecs:eu-west-2:117971648125:task-definition/test:4"
+  task_definition_arn = "arn:aws:ecs:eu-west-2:117971648125:task-definition/smtx-rual-cv:1"
   subnet_ids = [aws_subnet.smtx_sub1.id, aws_subnet.smtx_sub2.id]
   create_security_group = false
   security_group_ids = [aws_default_security_group.default.id]
@@ -96,22 +91,6 @@ module "alb" {
   # For example only
   enable_deletion_protection = false
 
-  # Security Group
-  # security_group_ingress_rules = {
-  #   all_http = {
-  #     from_port   = 80
-  #     to_port     = 80
-  #     ip_protocol = "tcp"
-  #     cidr_ipv4   = "0.0.0.0/0"
-  #   }
-  # }
-  # security_group_egress_rules = {
-  #   all = {
-  #     ip_protocol = "-1"
-  #     cidr_ipv4   = aws_subnet.smtx_sub1.cidr_block
-  #   }
-  # }
-
   create_security_group = false
   security_groups = [ aws_default_security_group.default.id ]
 
@@ -154,11 +133,6 @@ module "alb" {
 
   
 }
-
-
-# data "aws_ssm_parameter" "ecs_optimized_ami" {
-#   name = "/aws/service/ecs/optimized-ami/amazon-linux-2/recommended"
-# }
 
 
 
