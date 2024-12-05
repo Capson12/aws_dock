@@ -62,7 +62,7 @@ module "ecs_service" {
   load_balancer = {
     service = {
       target_group_arn = module.alb.target_groups["ex_ecs"].arn
-      container_name = "wordard"
+      container_name = "cv-app"
       container_port = 80
     }
   }
