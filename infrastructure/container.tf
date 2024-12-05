@@ -75,7 +75,9 @@ module "ecs_service" {
 ################################################################################
 # Supporting Resources
 ################################################################################
-
+data "aws_ssm_parameter" "ecs_optimized_ami" {
+  name = "/aws/service/ecs/optimized-ami/amazon-linux-2/recommended"
+}
 
 module "alb" {
   source  = "terraform-aws-modules/alb/aws"
@@ -139,7 +141,7 @@ module "alb" {
 module "autoscaling" {
     source = "terraform-aws-modules/autoscaling/aws"
     version = "~> 6.5"
-    image_id = "ami-083875b2e7198adf0"
+    image_id = jsondecode(data.aws_ssm_parameter.ecs_optimized_ami.value)["image_id"]
     
 
     for_each = {
